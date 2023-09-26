@@ -1,16 +1,21 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import BaseLayout from "./BaseLayout.astro";
-const { frontmatter } = Astro.props;
+
+type Props = {
+  post: CollectionEntry<"post">["data"];
+};
+const { post } = Astro.props;
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
-  <p>{frontmatter.pubDate.slice(0, 10)}</p>
-  <p><em>{frontmatter.description}</em></p>
-  <p>Written by: {frontmatter.author}</p>
-  <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+<BaseLayout pageTitle={post.title}>
+  <p>{post.pubDate.toDateString()}</p>
+  <p><em>{post.description}</em></p>
+  <p>Written by: {post.author}</p>
+  <img src={post.image.url} width="300" alt={post.image.alt} />
   <div class="tags">
     {
-      frontmatter.tags.map((tag) => (
+      post.tags.map((tag) => (
         <p class="tag">
           <a href={`/tags/${tag}`}>{tag}</a>
         </p>

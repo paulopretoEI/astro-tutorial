@@ -7,4 +7,4 @@ type Props = {
 const { url, title } = Astro.props;
 ---
 
-<li><a href={url}>{title}</a></li>
+<li><a href={`/posts/${url}`}>{title}</a></li>
